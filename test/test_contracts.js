@@ -1,19 +1,19 @@
-const{expect} = require("chai")
-const {describe, it } = require("node:test");
-describe("NFT_Market", function(){
+const{ expect } = require("chai")
+
+describe("NFTMarket", function(){
 
   it("Deploy the smart contracts, mint nfts, set price and sell the nft.", async () => {
-    const Market = await ethers.getContractFactory("NFT_Market")
+    const Market = await ethers.getContractFactory("NFTMarket")
     const market = await Market.deploy()
     await market.deployed();
     const marketAddress = market.address;
 
-    const NFT = await ethers.getContractFactory("NFT_Create")
-    const nft = await NFT.deploy(marketaddress);
+    const NFT = await ethers.getContractFactory("NFT")
+    const nft = await NFT.deploy(marketAddress);
     await nft.deployed()
     const nftContractAddress = nft.address;
 
-    let ListingPrice = await market.getlistingPrice();
+    let ListingPrice = await market.getlistingprice();
     ListingPrice = ListingPrice.toString();
 
     const sellingPrice = ethers.utils.parseUnits("10", "ether");
